@@ -1,4 +1,4 @@
-![moko-network](img/konet-logo.png)  
+![moko-network](img/konet-logo-p.png)  
 [![GitHub license](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg?style=flat)](http://www.apache.org/licenses/LICENSE-2.0) [![Download](https://api.bintray.com/packages/eduayuso/kolibs/konet/images/download.svg) ](NOT RELEASED) ![kotlin-version](https://img.shields.io/badge/kotlin-1.3.70-orange)
 
 # Kotlin multiplatform network library
