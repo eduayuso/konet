@@ -47,7 +47,7 @@ allprojects {
 
 project build.gradle
 ```groovy
-apply plugin: "dev.eduayuso.mobile.multiplatform-network-generator"
+apply plugin: "dev.eduayuso.kolibs.konet"
 ```
 
 ## Usage
