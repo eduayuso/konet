@@ -38,7 +38,7 @@ publishing {
             username = System.getProperty("user")
             password = System.getProperty("pass")
         }
-    }
+    }//ads
 }
 
 // workaround while https://youtrack.jetbrains.com/issue/KT-36720 not implemented
