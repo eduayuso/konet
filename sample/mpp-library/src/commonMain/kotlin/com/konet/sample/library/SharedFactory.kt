@@ -23,13 +23,6 @@ object SharedFactory {
         }
     }
 
-    private val serialization by lazy {
-
-        mapOf(
-            Constants.Apis.Test.users to DUser.serializer()
-        )
-    }
-
     val testApi by lazy {
 
         KoApiClient(

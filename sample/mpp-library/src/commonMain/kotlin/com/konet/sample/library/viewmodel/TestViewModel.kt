@@ -4,20 +4,13 @@
 
 package com.konet.sample.library.viewmodel
 
-import com.konet.sample.library.SharedFactory
-import com.konet.sample.library.domain.model.DUser
 import com.konet.sample.library.domain.model.DUsersPage
 import com.konet.sample.library.domain.repository.UsersRepository
 import dev.icerock.moko.mvvm.livedata.LiveData
 import dev.icerock.moko.mvvm.livedata.MutableLiveData
 import dev.icerock.moko.mvvm.livedata.readOnly
 import dev.icerock.moko.mvvm.viewmodel.ViewModel
-import io.ktor.client.HttpClient
-import io.ktor.client.features.logging.LogLevel
-import io.ktor.client.features.logging.Logger
-import io.ktor.client.features.logging.Logging
 import kotlinx.coroutines.launch
-import kotlinx.serialization.ImplicitReflectionSerializer
 
 class TestViewModel : ViewModel() {
 

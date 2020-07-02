@@ -23,10 +23,9 @@ android {
         minSdkVersion(Versions.Android.minSdk)
         targetSdkVersion(Versions.Android.targetSdk)
 
-        applicationId = "dev.eduayuso.kolibs.samples.konet"
-
-        versionCode = 1
-        versionName = "0.1.0"
+        applicationId = Products.KonetSampleApp.appId
+        versionCode = Products.KonetSampleApp.versionCode
+        versionName = Products.KonetSampleApp.versionName
 
         vectorDrawables.useSupportLibrary = true
     }
