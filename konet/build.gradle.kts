@@ -10,8 +10,8 @@ plugins {
     id("maven-publish")
 }
 
-group = "dev.eduayuso.kolibs"
-version = Versions.Libs.MultiPlatform.konet
+group = Products.Konet.groupId
+version = Products.Konet.version
 
 android {
     compileSdkVersion(Versions.Android.compileSdk)

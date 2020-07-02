@@ -3,6 +3,7 @@
  */
 
 object Versions {
+
     object Android {
         const val compileSdk = 28
         const val targetSdk = 28
@@ -11,17 +12,14 @@ object Versions {
 
     const val kotlin = "1.3.70"
 
-    private const val konet = "0.1.0"
-
     object Plugins {
         const val android = "3.6.1"
-        const val kotlin = Versions.kotlin
-        const val konet = Versions.konet
+        const val kotlin = "1.3.70"
+        const val konet = Products.Konet.version
     }
 
     object Libs {
         object Android {
-            const val glide = "4.9.0"
             const val appCompat = "1.1.0"
             const val lifecycle = "2.0.0"
         }
@@ -31,7 +29,7 @@ object Versions {
             const val coroutines = "1.3.4"
             const val ktorClient = "1.3.2"
             const val ktorClientLogging = ktorClient
-            const val konet = Versions.konet
+            const val konet = Products.Konet.version
             const val mokoMvvm = "0.6.0"
         }
     }

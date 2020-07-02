@@ -1,5 +1,15 @@
 package com.konet.sample.library.domain.repository
 
+import com.konet.sample.library.Constants
+import com.konet.sample.library.SharedFactory
 import dev.eduayuso.kolibs.konet.IKoApiClient
 
-interface IRepository<API: IKoApiClient>
+/**
+ * @property api: The API the repository is about to consume
+ * @property resourceUrl: Each repository represents the CRUD operations over an API resource
+ */
+interface IRepository<ApiType: IKoApiClient> {
+
+    val api: ApiType
+    val resourceUrl: String
+}
