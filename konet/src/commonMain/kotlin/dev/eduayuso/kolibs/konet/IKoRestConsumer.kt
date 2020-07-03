@@ -1,11 +1,14 @@
 package dev.eduayuso.kolibs.konet
 
-import dev.eduayuso.kolibs.konet.impl.KoApiClient
 import io.ktor.client.HttpClient
 import kotlinx.serialization.StringFormat
-import kotlinx.serialization.json.Json
-import kotlinx.serialization.json.JsonConfiguration
 
+/**
+ * @property baseUrl: API base url
+ * @property resourcePath: API resource to consume
+ * @property httpClient: Ktor HTTP client
+ * @property json: JSON format
+ */
 interface IKoRestConsumer {
 
     val baseUrl: String

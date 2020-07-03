@@ -11,6 +11,8 @@ object Deps {
             "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.Plugins.kotlin}"
         const val kotlinSerialization =
             "org.jetbrains.kotlin:kotlin-serialization:${Versions.Plugins.kotlin}"
+        const val mokoNetwork =
+            "dev.icerock.moko:network:${Versions.Plugins.mokoNetwork}"
     }
 
     object Libs {
@@ -61,6 +63,11 @@ object Deps {
                 iosX64 = "dev.icerock.moko:mvvm-iosx64:${Versions.Libs.MultiPlatform.mokoMvvm}",
                 iosArm64 = "dev.icerock.moko:mvvm-iosarm64:${Versions.Libs.MultiPlatform.mokoMvvm}"
             )
+            val mokoNetwork = MultiPlatformLibrary(
+                common = "dev.icerock.moko:network:${Versions.Libs.MultiPlatform.mokoNetwork}",
+                iosX64 = "dev.icerock.moko:network-iosx64:${Versions.Libs.MultiPlatform.mokoNetwork}",
+                iosArm64 = "dev.icerock.moko:network-iosarm64:${Versions.Libs.MultiPlatform.mokoNetwork}"
+            )
         }
     }
 
@@ -70,6 +77,7 @@ object Deps {
         "org.jetbrains.kotlin.multiplatform" to Plugins.kotlin,
         "kotlin-kapt" to Plugins.kotlin,
         "kotlin-android" to Plugins.kotlin,
-        "kotlinx-serialization" to Plugins.kotlinSerialization
+        "kotlinx-serialization" to Plugins.kotlinSerialization,
+        "dev.icerock.mobile.multiplatform-network" to Plugins.mokoNetwork
     )
 }

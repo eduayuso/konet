@@ -1,7 +1,5 @@
 package com.konet.sample.library.domain.repository
 
-import com.konet.sample.library.Constants
-import com.konet.sample.library.SharedFactory
 import dev.eduayuso.kolibs.konet.IKoApiClient
 
 /**

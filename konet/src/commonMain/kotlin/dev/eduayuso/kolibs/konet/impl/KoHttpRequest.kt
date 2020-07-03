@@ -8,6 +8,8 @@ import io.ktor.client.request.request
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.StringFormat
 
+private const val PARAM_DELIMITER = "="
+
 class KoHttpRequest(
 
     http: HttpClient,
@@ -19,6 +21,13 @@ class KoHttpRequest(
     override val httpClient = http
     override val request = request
     override val json = json
+
+    override fun with(params:String): KoHttpRequest {
+
+        val splitted = params.split(PARAM_DELIMITER)
+        this.request.url.parameters.append(splitted[0],splitted[1])
+        return this
+    }
 
     override suspend fun <T> response(serializer: KSerializer<T>): T? {
 
