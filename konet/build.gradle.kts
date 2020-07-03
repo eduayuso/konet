@@ -1,5 +1,6 @@
 /*
- * Copyright 2020 Eduardo Rodriguez Ayuso. Use of this source code is governed by the Apache 2.0 license.
+ * Use of this source code is governed by the Apache 2.0 license.
+ * based on IceRock: moko-network
  */
 
 plugins {
@@ -26,6 +27,8 @@ dependencies {
     mppLibrary(Deps.Libs.MultiPlatform.kotlinStdLib)
     mppLibrary(Deps.Libs.MultiPlatform.serialization)
     mppLibrary(Deps.Libs.MultiPlatform.ktorClient)
+    mppLibrary(Deps.Libs.MultiPlatform.mokoNetwork)
+    mppLibrary(Deps.Libs.MultiPlatform.ktorClientLogging)
 
     androidLibrary(Deps.Libs.Android.appCompat)
 }

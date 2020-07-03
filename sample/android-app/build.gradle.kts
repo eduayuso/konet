@@ -1,6 +1,13 @@
 /*
- * Copyright 2019 IceRock MAG Inc. Use of this source code is governed by the Apache 2.0 license.
+ * Use of this source code is governed by the Apache 2.0 license.
+ * based on IceRock: moko-network
  */
+
+buildscript {
+    repositories {
+        google()
+    }
+}
 
 plugins {
     id("com.android.application")
@@ -48,8 +55,6 @@ android {
 
 dependencies {
     implementation(Deps.Libs.Android.kotlinStdLib.name)
-
     implementation(Deps.Libs.Android.appCompat.name)
-
     implementation(project(":sample:mpp-library"))
 }

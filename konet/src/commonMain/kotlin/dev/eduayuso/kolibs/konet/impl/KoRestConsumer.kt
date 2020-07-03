@@ -2,10 +2,14 @@ package dev.eduayuso.kolibs.konet.impl
 
 import dev.eduayuso.kolibs.konet.IKoHttpRequest
 import dev.eduayuso.kolibs.konet.IKoRestConsumer
+import dev.icerock.moko.network.LargeTextContent
 import io.ktor.client.request.HttpRequestBuilder
 import io.ktor.client.utils.EmptyContent
+import io.ktor.http.ContentType
 import io.ktor.http.HttpMethod
 import io.ktor.http.takeFrom
+import kotlinx.serialization.KSerializer
+import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonConfiguration
 
@@ -27,17 +31,37 @@ class KoRestConsumer(
 
     fun get(id:Int): IKoHttpRequest {
 
-        return this.buildRequest(HttpMethod.Get, "$this.resourcePath/$id", EmptyContent)
+        return this.buildRequest(HttpMethod.Get, "${this.resourcePath}/$id", EmptyContent)
     }
 
-    fun <T> put(body:T): IKoHttpRequest {
+    fun <T> post(body:T, serializable: KSerializer<T>): IKoHttpRequest {
 
-        return this.buildRequest(HttpMethod.Put, this.resourcePath, body!!)
+        val requestBody = this.buildRequestBody(body, serializable)
+        return this.buildRequest(HttpMethod.Post, this.resourcePath, requestBody)
     }
 
-    fun <T> post(body:T): IKoHttpRequest {
+    fun <T> put(id: Int, body: T, serializable: KSerializer<T>): IKoHttpRequest {
 
-        return this.buildRequest(HttpMethod.Post, this.resourcePath, body!!)
+        val requestBody = this.buildRequestBody(body, serializable)
+        return this.buildRequest(HttpMethod.Put, "${this.resourcePath}/$id", requestBody)
+    }
+
+    fun <T> patch(id: Int, body: T, serializable: KSerializer<T>): IKoHttpRequest {
+
+        val requestBody = this.buildRequestBody(body, serializable)
+        return this.buildRequest(HttpMethod.Patch, "${this.resourcePath}/$id", requestBody)
+    }
+
+    private fun <T> buildRequestBody(body: T, serializable: KSerializer<T>): LargeTextContent =
+
+        LargeTextContent(
+            json.stringify(serializable, body),
+            ContentType.Application.Json.withoutParameters()
+        )
+
+    fun delete(id:Int): IKoHttpRequest {
+
+        return this.buildRequest(HttpMethod.Delete, "${this.resourcePath}/$id", EmptyContent)
     }
 
     private fun buildRequest(method:HttpMethod, path:String, body: Any): IKoHttpRequest {

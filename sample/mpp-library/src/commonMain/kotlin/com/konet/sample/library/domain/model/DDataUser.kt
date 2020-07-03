@@ -5,5 +5,5 @@ import kotlinx.serialization.Serializable
 @Serializable
 class DDataUser(
 
-    val user: DUser
+    val data: DUser
 )

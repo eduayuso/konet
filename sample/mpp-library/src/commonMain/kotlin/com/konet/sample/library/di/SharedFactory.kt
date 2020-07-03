@@ -1,6 +1,7 @@
-package com.konet.sample.library
+package com.konet.sample.library.di
 
-import com.konet.sample.library.domain.model.DUser
+import com.konet.sample.library.Constants
+import com.konet.sample.library.domain.repository.UsersRepository
 import dev.eduayuso.kolibs.konet.impl.KoApiClient
 import io.ktor.client.HttpClient
 import io.ktor.client.features.logging.LogLevel
@@ -9,7 +10,7 @@ import io.ktor.client.features.logging.Logging
 
 object SharedFactory {
 
-    private val httpClient by lazy {
+    private val customHttpClient by lazy {
 
         HttpClient {
             install(Logging) {
@@ -23,11 +24,13 @@ object SharedFactory {
         }
     }
 
-    val testApi by lazy {
+    private val reqresApi by lazy {
 
-        KoApiClient(
-            url = Constants.Apis.Test.url,
-            http = httpClient
-        )
+        KoApiClient(url = Constants.Apis.Reqres.url)
+    }
+
+    val usersRepository: UsersRepository by lazy {
+
+        UsersRepository(reqresApi)
     }
 }

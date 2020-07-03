@@ -4,7 +4,7 @@ object Constants {
 
     object Apis {
 
-        object Test {
+        object Reqres {
             const val url = "https://reqres.in/api/"
             const val users = "users"
             const val messages = "messages"

@@ -7,7 +7,7 @@ object Versions {
     object Android {
         const val compileSdk = 28
         const val targetSdk = 28
-        const val minSdk = 16
+        const val minSdk = 21
     }
 
     const val kotlin = "1.3.70"
@@ -15,6 +15,7 @@ object Versions {
     object Plugins {
         const val android = "3.6.1"
         const val kotlin = "1.3.70"
+        const val mokoNetwork = "0.6.0"
         const val konet = Products.Konet.version
     }
 
@@ -31,6 +32,7 @@ object Versions {
             const val ktorClientLogging = ktorClient
             const val konet = Products.Konet.version
             const val mokoMvvm = "0.6.0"
+            const val mokoNetwork = "0.6.0"
         }
     }
 }
