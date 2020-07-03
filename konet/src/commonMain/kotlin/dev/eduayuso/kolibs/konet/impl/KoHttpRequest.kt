@@ -29,11 +29,12 @@ class KoHttpRequest(
         return this
     }
 
-    override suspend fun <T> response(serializer: KSerializer<T>): T? {
+    override suspend fun <T> response(serializer: KSerializer<T>?): T? {
 
         try {
             val result: String = httpClient.request(this.request)
-            return this.json.parse(serializer, result)
+            return if (serializer == null) null
+            else this.json.parse(serializer, result)
         } catch (pipeline: ReceivePipelineException) {
             throw pipeline.cause
         }

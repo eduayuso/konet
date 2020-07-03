@@ -2,28 +2,20 @@
 [![GitHub license](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg?style=flat)](http://www.apache.org/licenses/LICENSE-2.0) [![Download](https://api.bintray.com/packages/eduayuso/kolibs/konet/images/download.svg) ](NOT RELEASED) ![kotlin-version](https://img.shields.io/badge/kotlin-1.3.70-orange)
 
 # Kotlin multiplatform network library
-This is a Kotlin MultiPlatform library (iOS & Android) that relies on [ktor-client](https://github.com/ktorio/ktor) providing a network abstraction layer to access RESTful APIs easily, so like other libraries as Retrofit (Android) or Alamofire (iOS).
+Konet is a Kotlin MultiPlatform library (iOS & Android) that provides a network abstraction layer to request APIs over HTTP easily, so like other libraries as [Retrofit (Android)](https://github.com/square/retrofit) or [Alamofire (iOS)](https://github.com/Alamofire/Alamofire).
+This library is a wrapper over [ktor-client](https://github.com/ktorio/ktor) that make easier to use the ktor client features, and letting you to customize the logging, http interceptos and all
+other Ktor features if you need something more advanced than the default Konet configuration.
+
+The Konet library has been built using the network utils library of [moko-network](https://github.com/icerockdev/moko-network). Moko-network, by [IceRock](https://github.com/icerockdev) is a useful Kotlin mpp library that includes an API client source generator from an OpenAPI specification using Swagger (the generator feature is not included in Konet)
+
+Note: I encourage you to built your multiplatform solution using the [moko-template](https://github.com/icerockdev/moko-template), which comes along with a lot of very useful libs and utils to develop your Kotlin multiplatform projects. Personally I think that IceRock moko libs are nowdays the most recommended libs to make a modular and scalable multiplatform app. 
+
 [IN DEVELOPMENT]
 
 ## Table of Contents
-- [Requirements](#requirements)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Samples](#samples)
+- [How to install](#installation)
+- [How to use](#usage)
 - [License](#license)
-
-## Features
-- Api request abstractions:
-- GET
-- PUT (TODO)
-- PATCH (TODO)
-- POST (TODO)
-- DELETE (TODO)
-
-## Requirements
-- Gradle version 5.6.4+
-- Android API 16+
-- iOS version 9.0+
 
 ## Installation
 root build.gradle  
@@ -34,7 +26,7 @@ buildscript {
     }
 
     dependencies {
-        classpath "dev.eduayuso.kolibs:konet:0.6.0"
+        classpath "dev.eduayuso.kolibs:konet:0.1.0"
     }
 }
 
@@ -47,14 +39,60 @@ allprojects {
 
 project build.gradle
 ```groovy
-apply plugin: "dev.eduayuso.kolibs.konet" //
+apply plugin: "dev.eduayuso.kolibs.konet"
 ```
 
 ## Usage
-TODO
+Basic example: How to make a request to a fake API [https://reqres.in/](https://reqres.in/) in a MVVM / MVP project using Kotlin coroutines.
 
-## Samples
-In source code (/konet/sample/)
+##### 1.- Create your API client. You can create this property inside a SharedFactory class in your mpp-library
+```kotlin
+val sampleApi by lazy {
+
+    KoApiClient(url = "https://reqres.in/api/")
+}
+```
+
+##### 2.- Create your Repository class. (We recommend to use the repository pattern - more details in sample sources)
+ ```kotlin
+class UsersRepository(api:KoApiClient) {
+    
+    /** 
+     * This makes a GET request to: https://reqres.in/users/{id}.
+     * We need to provide the model serializer to the response resolver
+     */
+    suspend fun getUserById(id:Int): UserModel? {
+        
+        return api.consume("users").get(id).response(UserModel.serializer())
+    }
+}
+```
+ ```kotlin
+@Serializable
+data class UserModel(
+    var id: Int?,
+    var email: String?
+)
+```
+##### 3.- Use the UsersRepository in your viewModel to consume the API and present the results
+```kotlin
+class UsersViewModel: ViewModel() {
+
+    val userRepo: UsersRepository // injected
+
+    fun onFetchUserClick(id:Int) {
+    
+        viewModelScope.launch {
+            try {
+                val user = userRepo.getUserById(id)
+                // present your user entity
+            } catch (error: Exception) {
+                // catch and present the error
+            }
+        }
+    }
+}
+```
 
 ## License
         

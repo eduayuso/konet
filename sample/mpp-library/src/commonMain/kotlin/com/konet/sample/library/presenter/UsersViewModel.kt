@@ -93,8 +93,8 @@ class UsersViewModel: ViewModel() {
 
         viewModelScope.launch {
             try {
-                val updatedUser = userRepo.deleteUser(id)
-                _users.value = if (updatedUser != null) listOf(updatedUser) else emptyList()
+                userRepo.deleteUser(id)
+                _users.value = emptyList()
             } catch (error: Exception) {
                 println("can't load $error")
             }

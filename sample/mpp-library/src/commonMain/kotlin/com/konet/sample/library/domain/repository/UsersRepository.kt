@@ -47,7 +47,6 @@ class UsersRepository(api:KoApiClient): IRepository<KoApiClient> {
 
     suspend fun deleteUser(id:Int): DUser? {
 
-        //return api.consume(url).delete(id).response(DUser.serializer())
-        return null
+        return api.consume(url).delete(id).response(null)
     }
 }

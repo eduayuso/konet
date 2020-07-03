@@ -20,5 +20,5 @@ interface IKoHttpRequest {
 
     fun with(params:String): KoHttpRequest
 
-    suspend fun <T> response(serializer: KSerializer<T>): T?
+    suspend fun <T> response(serializer: KSerializer<T>?): T?
 }
