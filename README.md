@@ -8,7 +8,7 @@ other Ktor features if you need something more advanced than the default Konet c
 
 The Konet library has been built using the network utils library of [moko-network](https://github.com/icerockdev/moko-network). Moko-network, by [IceRock](https://github.com/icerockdev) is a useful Kotlin mpp library that includes an API client source generator from an OpenAPI specification using Swagger (the generator feature is not included in Konet)
 
-Note: I encourage you to built your multiplatform solution using the [moko-template](https://github.com/icerockdev/moko-template), which comes along with a lot of very useful libs and utils to develop your Kotlin multiplatform projects. Personally I think that IceRock moko libs are nowdays the most recommended libs to make a modular and scalable multiplatform app. 
+Note: I encourage you to built your multiplatform solution using the [moko-template](https://github.com/icerockdev/moko-template), which comes along with a lot of very useful libs and utils to develop modular and scalable Kotlin multiplatform projects. 
 
 [IN DEVELOPMENT]
 
@@ -53,15 +53,20 @@ val sampleApi by lazy {
 }
 ```
 
-##### 2.- Create your Repository class. (We recommend to use the repository pattern - more details in sample sources)
+##### 2.- Create your Repository. (We recommend to use the repository pattern - more details in sample sources)
  ```kotlin
-class UsersRepository(api:KoApiClient) {
+interface IUserRepository {
+    
+    suspend fun getUserById(id:Int): UserModel?
+}
+
+class UsersRepository(api:KoApiClient): IUserRepository {
     
     /** 
      * This makes a GET request to: https://reqres.in/users/{id}.
      * We need to provide the model serializer to the response resolver
      */
-    suspend fun getUserById(id:Int): UserModel? {
+    override suspend fun getUserById(id:Int): UserModel? {
         
         return api.consume("users").get(id).response(UserModel.serializer())
     }
@@ -76,9 +81,11 @@ data class UserModel(
 ```
 ##### 3.- Use the UsersRepository in your viewModel to consume the API and present the results
 ```kotlin
-class UsersViewModel: ViewModel() {
+class UsersViewModel(
+    
+    val userRepo: IUsersRepository // implementation is injected
 
-    val userRepo: UsersRepository // injected
+): ViewModel() {
 
     fun onFetchUserClick(id:Int) {
     

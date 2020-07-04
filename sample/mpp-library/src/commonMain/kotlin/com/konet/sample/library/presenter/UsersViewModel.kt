@@ -1,21 +1,30 @@
 package com.konet.sample.library.presenter
 
-import com.konet.sample.library.di.SharedFactory
+import com.konet.sample.library.domain.cache.IDataCache
+import com.konet.sample.library.domain.model.DAuthRequest
+import com.konet.sample.library.domain.model.DAuthResponse
 import com.konet.sample.library.domain.model.DUser
-import com.konet.sample.library.domain.model.DUsersPage
+import com.konet.sample.library.domain.repository.IAuthRepository
+import com.konet.sample.library.domain.repository.IUsersRepository
 import dev.icerock.moko.mvvm.livedata.LiveData
 import dev.icerock.moko.mvvm.livedata.MutableLiveData
 import dev.icerock.moko.mvvm.livedata.readOnly
 import dev.icerock.moko.mvvm.viewmodel.ViewModel
 import kotlinx.coroutines.launch
 
-class UsersViewModel: ViewModel() {
+class UsersViewModel(
 
-    private val userRepo = SharedFactory.usersRepository
+    private val cache: IDataCache,
+    private val userRepo: IUsersRepository,
+    private val authRepo: IAuthRepository
+
+): ViewModel() {
 
     private val _users = MutableLiveData<List<DUser>?>(null)
+    private val _authResult = MutableLiveData<DAuthResponse?>(null)
 
     val users: LiveData<List<DUser>?> = _users.readOnly()
+    val authResult: LiveData<DAuthResponse?> = _authResult.readOnly()
 
     fun getAllUsers() {
 
@@ -77,18 +86,6 @@ class UsersViewModel: ViewModel() {
         }
     }
 
-    fun patchUser(user: DUser) {
-
-        viewModelScope.launch {
-            try {
-                val updatedUser = userRepo.patchUser(user)
-                _users.value = if (updatedUser != null) listOf(updatedUser) else emptyList()
-            } catch (error: Exception) {
-                println("can't load $error")
-            }
-        }
-    }
-
     fun deleteUser(id: Int) {
 
         viewModelScope.launch {
@@ -97,6 +94,20 @@ class UsersViewModel: ViewModel() {
                 _users.value = emptyList()
             } catch (error: Exception) {
                 println("can't load $error")
+            }
+        }
+    }
+
+    fun login(auth: DAuthRequest) {
+
+        viewModelScope.launch {
+            try {
+                val response = authRepo.login(auth)
+                cache.authToken = response?.token
+                _authResult.value = response
+            } catch (error: Exception) {
+                println("can't load $error")
+                _authResult.value = DAuthResponse(token = null, error = "${error.message}")
             }
         }
     }
