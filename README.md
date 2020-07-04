@@ -1,5 +1,5 @@
 ![konet](img/konet-logo-p.png)  
-[![GitHub license](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg?style=flat)](http://www.apache.org/licenses/LICENSE-2.0) [![Download](https://api.bintray.com/packages/eduayuso/kolibs/konet/images/download.svg) ](NOT RELEASED) ![kotlin-version](https://img.shields.io/badge/kotlin-1.3.70-orange)
+[![GitHub license](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg?style=flat)](http://www.apache.org/licenses/LICENSE-2.0) [![Download](https://api.bintray.com/packages/eduayuso/kolibs/konet/images/download.svg) ](https://bintray.com/eduayuso/kolibs/konet/0.1.1) ![kotlin-version](https://img.shields.io/badge/kotlin-1.3.70-orange)
 
 # Kotlin multiplatform network library
 Konet is a Kotlin MultiPlatform library (iOS & Android) that provides a network abstraction layer to request APIs over HTTP easily, so like other libraries as [Retrofit (Android)](https://github.com/square/retrofit) or [Alamofire (iOS)](https://github.com/Alamofire/Alamofire).
@@ -10,11 +10,10 @@ The Konet library has been built using the network utils library of [moko-networ
 
 Note: I encourage you to built your multiplatform solution using the [moko-template](https://github.com/icerockdev/moko-template), which comes along with a lot of very useful libs and utils to develop modular and scalable Kotlin multiplatform projects. 
 
-[IN DEVELOPMENT]
-
 ## Table of Contents
 - [How to install](#installation)
 - [How to use](#usage)
+- [TODO](#TODO)
 - [License](#license)
 
 ## Installation
@@ -26,7 +25,7 @@ buildscript {
     }
 
     dependencies {
-        classpath "dev.eduayuso.kolibs:konet:0.1.0"
+        classpath "dev.eduayuso.kolibs:konet:0.1.1"
     }
 }
 
@@ -35,11 +34,6 @@ allprojects {
         maven { url = "https://dl.bintray.com/eduayuso/kolibs" }
     }
 }
-```
-
-project build.gradle
-```groovy
-apply plugin: "dev.eduayuso.kolibs.konet"
 ```
 
 ## Usage
@@ -55,12 +49,12 @@ val sampleApi by lazy {
 
 ##### 2.- Create your Repository. (We recommend to use the repository pattern - more details in sample sources)
  ```kotlin
-interface IUserRepository {
+interface IUsersRepository {
     
     suspend fun getUserById(id:Int): UserModel?
 }
 
-class UsersRepository(api:KoApiClient): IUserRepository {
+class UsersRepository(api:KoApiClient): IUsersRepository {
     
     /** 
      * This makes a GET request to: https://reqres.in/users/{id}.
@@ -100,6 +94,10 @@ class UsersViewModel(
     }
 }
 ```
+
+## TODO
+
+Test and samples in IOS
 
 ## License
         

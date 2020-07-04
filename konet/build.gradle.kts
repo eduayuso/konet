@@ -38,10 +38,10 @@ publishing {
         name = "bintray"
 
         credentials {
-            username = System.getProperty("user")
-            password = System.getProperty("pass")
+            username = "eduayuso"
+            password = "627efcc57f88c1290cf05e3543ff6660949046f1"
         }
-    }//ads
+    }
 }
 
 // workaround while https://youtrack.jetbrains.com/issue/KT-36720 not implemented
