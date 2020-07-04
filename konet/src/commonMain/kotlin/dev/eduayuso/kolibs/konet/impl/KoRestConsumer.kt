@@ -53,17 +53,23 @@ class KoRestConsumer(
         return this.buildRequest(HttpMethod.Patch, "${this.resourcePath}/$id", requestBody)
     }
 
+    fun <T> delete(body: T, serializable: KSerializer<T>): IKoHttpRequest {
+
+        val requestBody = this.buildRequestBody(body, serializable)
+        return this.buildRequest(HttpMethod.Delete, this.resourcePath, requestBody)
+    }
+
+    fun delete(id:Int): IKoHttpRequest {
+
+        return this.buildRequest(HttpMethod.Delete, "${this.resourcePath}/$id", EmptyContent)
+    }
+
     private fun <T> buildRequestBody(body: T, serializable: KSerializer<T>): LargeTextContent =
 
         LargeTextContent(
             json.stringify(serializable, body),
             ContentType.Application.Json.withoutParameters()
         )
-
-    fun delete(id:Int): IKoHttpRequest {
-
-        return this.buildRequest(HttpMethod.Delete, "${this.resourcePath}/$id", EmptyContent)
-    }
 
     private fun buildRequest(method:HttpMethod, path:String, body: Any): IKoHttpRequest {
 
