@@ -4,19 +4,20 @@ object Constants {
 
     object Apis {
 
+        /**
+         * Fake API without authorization
+         */
         object Reqres {
             const val url = "https://reqres.in/api/"
             const val users = "users"
-            const val messages = "messages"
-            // ... other resources
+            const val login = "login"
         }
-
-        object Another {
-            const val url = "another api ..."
-            const val anotherResource = "another resource"
-            // ... other resources
-        }
-
-        // ... other apis
     }
+
+    object Headers {
+
+        const val authorization = "Authorization"
+    }
+
+    const val bearer = "Bearer"
 }

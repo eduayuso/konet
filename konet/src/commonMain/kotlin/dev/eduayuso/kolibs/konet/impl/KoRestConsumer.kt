@@ -1,5 +1,6 @@
 package dev.eduayuso.kolibs.konet.impl
 
+import dev.eduayuso.kolibs.konet.Defaults
 import dev.eduayuso.kolibs.konet.IKoHttpRequest
 import dev.eduayuso.kolibs.konet.IKoRestConsumer
 import dev.icerock.moko.network.LargeTextContent
@@ -22,7 +23,7 @@ class KoRestConsumer(
     override val baseUrl = api.baseUrl
     override val resourcePath = resourcePath
     override val httpClient = api.httpClient
-    override val json = Json(JsonConfiguration(ignoreUnknownKeys = true))
+    override val json = Defaults.json
 
     fun get(): IKoHttpRequest {
 

@@ -6,9 +6,9 @@ object Products {
         const val version = "0.1.0"
     }
 
-    object KonetSampleApp {
+    object SampleApp {
 
-        const val appId = "dev.eduayuso.kolibs.samples.konet"
+        const val appId = "dev.eduayuso.kolibs.samples.konet.users"
         const val versionCode = 1
         const val versionName = "0.1.0"
     }
