@@ -53,7 +53,8 @@ interface IUsersRepository {
     
     suspend fun getUserById(id:Int): UserModel?
 }
-
+```
+```kotlin
 class UsersRepository(api:KoApiClient): IUsersRepository {
     
     /** 
