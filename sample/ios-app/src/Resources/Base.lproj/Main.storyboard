@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="zIh-nI-gcX">
+    <device id="retina4_0" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="snE-Ct-w85">
+            <objects>
+                <navigationController id="zIh-nI-gcX" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="aGe-Yj-KQZ">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="tpQ-LY-4wm" kind="relationship" relationship="rootViewController" id="iw1-Xy-f57"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dpF-aw-Lyj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-5946" y="-1482"/>
+        </scene>
+        <!--Konet iOS Sample-->
+        <scene sceneID="heM-ap-51W">
+            <objects>
+                <viewController id="tpQ-LY-4wm" customClass="UsersViewController" customModule="konet_app" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="MKQ-Qk-EWk"/>
+                        <viewControllerLayoutGuide type="bottom" id="Ba9-2V-dd9"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bE-ud-soL">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="AEq-kT-qRm">
+                                <rect key="frame" x="77" y="340" width="166" height="210"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aeS-KV-Tvh">
+                                        <rect key="frame" x="0.0" y="0.0" width="166" height="30"/>
+                                        <state key="normal" title="GET /api/users"/>
+                                        <connections>
+                                            <action selector="getUsersClick:" destination="tpQ-LY-4wm" eventType="touchUpInside" id="wbt-xp-Ltb"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="keq-Qh-ir8">
+                                        <rect key="frame" x="0.0" y="30" width="166" height="30"/>
+                                        <state key="normal" title="GET /api/users/?page=2"/>
+                                        <connections>
+                                            <action selector="getUsersPageClick:" destination="tpQ-LY-4wm" eventType="touchUpInside" id="Efe-pv-gau"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rv5-fd-lab">
+                                        <rect key="frame" x="0.0" y="60" width="166" height="30"/>
+                                        <state key="normal" title="GET /api/users/2"/>
+                                        <connections>
+                                            <action selector="getUserClick:" destination="tpQ-LY-4wm" eventType="touchUpInside" id="u9f-F3-6dO"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bgO-iI-wBL">
+                                        <rect key="frame" x="0.0" y="90" width="166" height="30"/>
+                                        <state key="normal" title="POST /api/users"/>
+                                        <connections>
+                                            <action selector="postUsersClick:" destination="tpQ-LY-4wm" eventType="touchUpInside" id="mjn-Il-X1n"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wEb-Mn-BW6">
+                                        <rect key="frame" x="0.0" y="120" width="166" height="30"/>
+                                        <state key="normal" title="PUT /api/users/2"/>
+                                        <connections>
+                                            <action selector="putUsersClick:" destination="tpQ-LY-4wm" eventType="touchUpInside" id="32J-sA-ZxT"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XRH-J5-wJ7">
+                                        <rect key="frame" x="0.0" y="150" width="166" height="30"/>
+                                        <state key="normal" title="DELETE /api/users/2"/>
+                                        <connections>
+                                            <action selector="deleteUserClick:" destination="tpQ-LY-4wm" eventType="touchUpInside" id="zVM-SE-tnF"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GaX-sC-Q9O">
+                                        <rect key="frame" x="0.0" y="180" width="166" height="30"/>
+                                        <state key="normal" title="POST /api/login"/>
+                                        <connections>
+                                            <action selector="loginClick:" destination="tpQ-LY-4wm" eventType="touchUpInside" id="nHH-Jy-3LA"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6T3-sy-j5F">
+                                <rect key="frame" x="34" y="62" width="252" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Ba9-2V-dd9" firstAttribute="top" secondItem="AEq-kT-qRm" secondAttribute="bottom" constant="18" id="3DA-lI-fi4"/>
+                            <constraint firstItem="6T3-sy-j5F" firstAttribute="top" secondItem="MKQ-Qk-EWk" secondAttribute="bottom" constant="18" id="7gY-Tf-sEq"/>
+                            <constraint firstItem="6T3-sy-j5F" firstAttribute="leading" secondItem="8bE-ud-soL" secondAttribute="leadingMargin" constant="18" id="Rth-Ys-ArF"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="6T3-sy-j5F" secondAttribute="trailing" constant="18" id="aa4-ir-x7x"/>
+                            <constraint firstItem="6T3-sy-j5F" firstAttribute="centerX" secondItem="8bE-ud-soL" secondAttribute="centerX" id="fJY-tl-MNO"/>
+                            <constraint firstItem="AEq-kT-qRm" firstAttribute="centerX" secondItem="8bE-ud-soL" secondAttribute="centerX" id="gCg-76-2qJ"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Konet iOS Sample" id="ftM-lC-K7M"/>
+                    <connections>
+                        <outlet property="apiResultsTextView" destination="6T3-sy-j5F" id="mMR-9t-JYr"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eQs-JZ-rVh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-5033" y="-1482"/>
+        </scene>
+    </scenes>
+</document>
