@@ -94,6 +94,10 @@ class UsersViewModel(
     }
 }
 ```
+##### Notes:
+* In /sample folder in sources you can see a sample app for Android and for iOS
+* To run the iOS sample app you need to run 'pod install' inside the /sample/ios-app folder, after
+a successful build you can open the project by selecting the 'xcworkspace' file.
 
 ## License
         
