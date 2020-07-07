@@ -26,10 +26,11 @@ class UsersActivity : AppCompatActivity() {
 
         getViewModel {
 
+            val factory = SharedFactory()
             UsersViewModel(
-                userRepo = SharedFactory.usersRepository,
-                authRepo = SharedFactory.authRepository,
-                cache = SharedFactory.cache
+                userRepo = factory.usersRepository,
+                authRepo = factory.authRepository,
+                cache = factory.cache
             )
         }
     }
@@ -37,8 +38,6 @@ class UsersActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
-
-        val props: Properties = System.getProperties()
 
         setContentView(R.layout.activity_users)
         usersTextView = findViewById(R.id.usersTextView)
@@ -48,13 +47,13 @@ class UsersActivity : AppCompatActivity() {
         viewModel.users.ld().observe(this, Observer {
             response ->
             showProgress(false)
-            usersTextView.text = this.usersToString(response)
+            usersTextView.text = viewModel.parseUsers(response)
         })
 
         viewModel.authResult.ld().observe(this, Observer {
             response ->
             showProgress(false)
-            authTextView.text = if (response?.token == null) response?.error ?: "" else "Token:${response.token}"
+            authTextView.text = viewModel.parseResponse(response)
         })
     }
 
@@ -63,9 +62,6 @@ class UsersActivity : AppCompatActivity() {
         usersTextView.visibility = if (show) View.INVISIBLE else View.VISIBLE
         authTextView.visibility = if (show) View.INVISIBLE else View.VISIBLE
     }
-
-    private fun usersToString(users: List<DUser>?): String =
-        users?.joinToString(separator = "\n") { "${it.id}: ${it.first_name} (${it.email})" } ?: ""
 
     fun getUsersClick(view: View) {
         showProgress(true)

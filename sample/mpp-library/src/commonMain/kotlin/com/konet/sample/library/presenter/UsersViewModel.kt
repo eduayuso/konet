@@ -111,4 +111,11 @@ class UsersViewModel(
             }
         }
     }
+
+    fun parseResponse(res:DAuthResponse?): String =
+
+        if (res?.token == null) res?.error ?: "" else "Token:${res.token}"
+
+    fun parseUsers(users: List<DUser>?): String =
+        users?.joinToString(separator = "\n") { "${it.id}: ${it.first_name} (${it.email})" } ?: ""
 }

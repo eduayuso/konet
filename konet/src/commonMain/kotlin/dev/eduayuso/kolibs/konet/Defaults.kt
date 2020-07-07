@@ -12,7 +12,12 @@ import io.ktor.http.HttpStatusCode
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonConfiguration
 
-object Defaults {
+/*
+ * This must be a 'class', can't be an 'object' because in iOS the httpClient
+ * can't be static nor stored in a static structure.
+ * https://github.com/ktorio/ktor/issues/887
+ */
+class Defaults {
 
     val json = Json(JsonConfiguration(ignoreUnknownKeys = true))
 
