@@ -3,9 +3,8 @@ package dev.eduayuso.kolibs.konet.impl
 import dev.eduayuso.kolibs.konet.Defaults
 import dev.eduayuso.kolibs.konet.IKoApiClient
 import io.ktor.client.HttpClient
-import io.ktor.client.features.logging.LogLevel
-import io.ktor.client.features.logging.Logger
-import io.ktor.client.features.logging.Logging
+
+val defaults = Defaults()
 
 open class KoApiClient(
     url: String,
@@ -13,7 +12,7 @@ open class KoApiClient(
 
 ): IKoApiClient {
 
-    constructor(url:String): this(url, Defaults.httpClient)
+    constructor(url:String): this(url, defaults.httpClient)
 
     override val baseUrl = url
     override val httpClient = http

@@ -23,7 +23,7 @@ class KoRestConsumer(
     override val baseUrl = api.baseUrl
     override val resourcePath = resourcePath
     override val httpClient = api.httpClient
-    override val json = Defaults.json
+    override val json = defaults.json
 
     fun get(): IKoHttpRequest {
 
@@ -45,6 +45,12 @@ class KoRestConsumer(
 
         val requestBody = this.buildRequestBody(body, serializable)
         return this.buildRequest(HttpMethod.Put, "${this.resourcePath}/$id", requestBody)
+    }
+
+    fun <T> put(body: T, serializable: KSerializer<T>): IKoHttpRequest {
+
+        val requestBody = this.buildRequestBody(body, serializable)
+        return this.buildRequest(HttpMethod.Put, resourcePath, requestBody)
     }
 
     fun <T> patch(id: Int, body: T, serializable: KSerializer<T>): IKoHttpRequest {
