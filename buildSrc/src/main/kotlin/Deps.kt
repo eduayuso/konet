@@ -54,9 +54,9 @@ object Deps {
                 ios = "io.ktor:ktor-client-logging-native:${Versions.Libs.MultiPlatform.ktorClientLogging}"
             )
             val konet = MultiPlatformLibrary(
-                common = "dev.eduayuso.kolibs:konet:${Versions.Libs.MultiPlatform.konet}",
+                common = "dev.eduayuso.kolibs:konet:${Versions.Libs.MultiPlatform.konet}"/*,
                 iosX64 = "dev.eduayuso.kolibs:konet-iosx64:${Versions.Libs.MultiPlatform.konet}",
-                iosArm64 = "dev.eduayuso.kolibs:konet-iosarm64:${Versions.Libs.MultiPlatform.konet}"
+                iosArm64 = "dev.eduayuso.kolibs:konet-iosarm64:${Versions.Libs.MultiPlatform.konet}"*/
             )
             val mokoMvvm = MultiPlatformLibrary(
                 common = "dev.icerock.moko:mvvm:${Versions.Libs.MultiPlatform.mokoMvvm}",

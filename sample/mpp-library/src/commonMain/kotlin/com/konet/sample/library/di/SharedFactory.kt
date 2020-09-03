@@ -88,7 +88,14 @@ class SharedFactory {
 
     private val reqresApi by lazy {
 
-        KoApiClient(url = Constants.Apis.Reqres.url)
+        KoApiClient(
+            url = Constants.Apis.Reqres.url,
+            http = customHttpClient,
+            headers = mapOf(
+                "a333" to "aqwerqwer",
+                "EEE" to "aq333333 as dfa sdr"
+            )
+        )
         // Pass a customHttpClient to the api if you need an additional feature as TokenFeature
         // KoApiClient(url = Constants.Apis.Reqres.url, http = customHttpClient)
     }

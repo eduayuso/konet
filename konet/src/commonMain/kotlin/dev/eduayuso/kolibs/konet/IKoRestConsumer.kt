@@ -14,5 +14,6 @@ interface IKoRestConsumer {
     val baseUrl: String
     val resourcePath: String
     val httpClient: HttpClient
+    val httpHeaders: Map<String, String>
     val json: StringFormat
 }
