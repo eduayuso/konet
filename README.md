@@ -42,9 +42,12 @@ Basic example: How to make a request to a fake API [https://reqres.in/](https://
 ```kotlin
 val sampleApi by lazy {
 
-    KoApiClient(url = "https://reqres.in/api/")
+    DefaultKoApiClient(
+        baseUrl = "https://reqres.in/api/"
+    )
 }
 ```
+(You also can use the abstract class KoApiClient to define a custom Api with more options - see sample app sources)
 
 ##### 2.- Create your Repository. (We recommend to use the repository pattern - more details in sample sources)
  ```kotlin
