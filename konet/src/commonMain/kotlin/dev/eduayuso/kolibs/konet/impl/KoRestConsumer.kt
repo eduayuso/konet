@@ -23,6 +23,7 @@ class KoRestConsumer(
     override val baseUrl = api.baseUrl
     override val resourcePath = resourcePath
     override val httpClient = api.httpClient
+    override val httpHeaders = api.getHeaders()
     override val json = defaults.json
 
     fun get(): IKoHttpRequest {
@@ -90,7 +91,9 @@ class KoRestConsumer(
             }
         }
         with(builder.headers) {
-            append("Accept", "application/json")
+            httpHeaders.map {
+                append(it.key, it.value)
+            }
         }
 
         return KoHttpRequest(

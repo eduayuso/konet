@@ -1,7 +1,7 @@
-![konet](img/konet-logo-p.png)  
+# Konet
+
 [![GitHub license](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg?style=flat)](http://www.apache.org/licenses/LICENSE-2.0) [![Download](https://api.bintray.com/packages/eduayuso/kolibs/konet/images/download.svg) ](https://bintray.com/eduayuso/kolibs/konet/1.0.0) ![kotlin-version](https://img.shields.io/badge/kotlin-1.3.72-orange)
 
-# Kotlin multiplatform network library
 Konet is a Kotlin MultiPlatform library (iOS & Android) that provides a network abstraction layer to request APIs over HTTP easily, so like other libraries as [Retrofit (Android)](https://github.com/square/retrofit) or [Alamofire (iOS)](https://github.com/Alamofire/Alamofire).
 This library is a wrapper over [ktor-client](https://github.com/ktorio/ktor) that make easier to use the ktor client features, and letting you to customize the logging, http interceptos and all
 other Ktor features if you need something more advanced than the default Konet configuration.
@@ -24,7 +24,7 @@ buildscript {
     }
 
     dependencies {
-        classpath "dev.eduayuso.kolibs:konet:1.0.0"
+        classpath "dev.eduayuso.kolibs:konet:1.0.2"
     }
 }
 
@@ -42,9 +42,12 @@ Basic example: How to make a request to a fake API [https://reqres.in/](https://
 ```kotlin
 val sampleApi by lazy {
 
-    KoApiClient(url = "https://reqres.in/api/")
+    DefaultKoApiClient(
+        baseUrl = "https://reqres.in/api/"
+    )
 }
 ```
+(You also can use the abstract class KoApiClient to define a custom Api with more options - see sample app sources)
 
 ##### 2.- Create your Repository. (We recommend to use the repository pattern - more details in sample sources)
  ```kotlin

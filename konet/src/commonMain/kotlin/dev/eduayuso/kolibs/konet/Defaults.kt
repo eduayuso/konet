@@ -19,7 +19,15 @@ import kotlinx.serialization.json.JsonConfiguration
  */
 class Defaults {
 
-    val json = Json(JsonConfiguration(ignoreUnknownKeys = true))
+    val json = Json(
+        JsonConfiguration(
+            encodeDefaults = false,
+            isLenient = true,
+            ignoreUnknownKeys = true,
+            serializeSpecialFloatingPointValues = true,
+            useArrayPolymorphism = true
+        )
+    )
 
     val httpClient = HttpClient {
 

@@ -10,4 +10,5 @@ interface IKoApiClient {
 
     val baseUrl: String
     val httpClient: HttpClient
+    fun getHeaders(): Map<String, String>
 }

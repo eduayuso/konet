@@ -6,16 +6,7 @@ import io.ktor.client.HttpClient
 
 val defaults = Defaults()
 
-open class KoApiClient(
-    url: String,
-    http: HttpClient
-
-): IKoApiClient {
-
-    constructor(url:String): this(url, defaults.httpClient)
-
-    override val baseUrl = url
-    override val httpClient = http
+abstract class KoApiClient: IKoApiClient {
 
     fun consume(url:String): KoRestConsumer {
         return KoRestConsumer(this, url)
