@@ -1,32 +1,20 @@
-/*
- * Use of this source code is governed by the Apache 2.0 license.
- * based on IceRock: moko-network
- */
-
-buildscript {
-    repositories {
-        google()
-    }
-}
-
 plugins {
-    id("com.android.application")
-    id("kotlin-android")
-    id("kotlin-kapt")
+    plugin(Deps.Plugins.androidApplication)
+    plugin(Deps.Plugins.kotlinAndroid)
+    plugin(Deps.Plugins.kotlinKapt)
 }
 
 android {
     compileSdkVersion(Versions.Android.compileSdk)
 
-    dataBinding {
-        isEnabled = true
-    }
+    buildFeatures.dataBinding = true
 
     dexOptions {
         javaMaxHeapSize = "2g"
     }
 
     defaultConfig {
+
         minSdkVersion(Versions.Android.minSdk)
         targetSdkVersion(Versions.Android.targetSdk)
 
@@ -51,10 +39,15 @@ android {
     packagingOptions {
         exclude("META-INF/*.kotlin_module")
     }
+
+    lintOptions {
+        disable("Instantiatable") // bug Error: SimpleActivity must extend android.app.Activity [Instantiatable]
+    }
 }
 
 dependencies {
-    implementation(Deps.Libs.Android.kotlinStdLib.name)
-    implementation(Deps.Libs.Android.appCompat.name)
+    implementation(Deps.Libs.Android.appCompat)
+    implementation(Deps.Libs.Android.lifecycle)
+
     implementation(project(":sample:mpp-library"))
 }
