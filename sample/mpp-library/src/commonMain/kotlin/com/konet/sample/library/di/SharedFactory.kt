@@ -13,8 +13,6 @@ import io.ktor.client.HttpClient
 import io.ktor.client.features.logging.LogLevel
 import io.ktor.client.features.logging.Logger
 import io.ktor.client.features.logging.Logging
-import kotlinx.serialization.json.Json
-import kotlinx.serialization.json.JsonConfiguration
 
 /*
  * This must be a 'class', can't be an 'object' because in iOS the httpClient
