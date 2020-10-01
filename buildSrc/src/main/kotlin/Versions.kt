@@ -14,7 +14,6 @@ object Versions {
 
     object Plugins {
         const val android = "3.6.1"
-        const val kotlin = "1.3.72"
         const val mokoNetwork = "0.8.0"
         const val konet = Products.Konet.version
     }
@@ -24,7 +23,7 @@ object Versions {
         const val appCompat = "1.2.0"
         const val lifecycle = "2.2.0"
         const val serialization = "1.0.0-RC"
-        const val coroutines = "1.3.9"
+        const val coroutines = "1.3.9-native-mt-2"
         const val ktorClient = "1.4.0"
         const val konet = Products.Konet.version
         const val mokoMvvm = "0.8.0"

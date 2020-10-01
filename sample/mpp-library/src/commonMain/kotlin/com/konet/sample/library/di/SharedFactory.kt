@@ -3,7 +3,6 @@ package com.konet.sample.library.di
 import com.konet.sample.library.Constants
 import com.konet.sample.library.domain.cache.impl.DataCache
 import com.konet.sample.library.domain.repository.IAuthRepository
-import com.konet.sample.library.domain.repository.IUsersRepository
 import com.konet.sample.library.domain.repository.impl.AuthRepository
 import com.konet.sample.library.domain.repository.impl.UsersRepository
 import dev.eduayuso.kolibs.konet.impl.DefaultKoApiClient
@@ -24,7 +23,7 @@ class SharedFactory {
     /**
      * Default Api client instance with default Http client
      */
-    private val reqresApi by lazy {
+    private val reqresApi: DefaultKoApiClient by lazy {
 
         DefaultKoApiClient(
             baseUrl = Constants.Apis.Reqres.url
@@ -81,9 +80,43 @@ class SharedFactory {
         }
     }
 
-    val usersRepository: IUsersRepository by lazy {
+    /*
+    private val customHttpClient: HttpClient by lazy {
+        HttpClient {
+            install(ExceptionFeature) {
+                exceptionFactory = HttpExceptionFactory(
+                    defaultParser = ErrorExceptionParser(Defaults.json),
+                    customParsers = mapOf(
+                        HttpStatusCode.UnprocessableEntity.value to ValidationExceptionParser(Defaults.json)
+                    )
+                )
+            }
+            install(Logging) {
+                logger = object : Logger {
+                    override fun log(message: String) {
+                    //    Napier.d(message = message)
+                    }
+                }
+                level = LogLevel.HEADERS
+            }
+            install(TokenFeature) {
+                tokenHeaderName = "Authorization"
+                tokenProvider = object : TokenFeature.TokenProvider {
+                    override fun getToken(): String? = "hola"//keyValueStorage.token
+                }
+            }
 
-        UsersRepository(reqresApi)
+            // disable standard BadResponseStatus - exceptionfactory do it for us
+            expectSuccess = false
+        }
+    }
+    */
+
+    val usersRepository: UsersRepository by lazy {
+
+        UsersRepository(
+            api = reqresApi
+        )
     }
 
     val authRepository: IAuthRepository by lazy {

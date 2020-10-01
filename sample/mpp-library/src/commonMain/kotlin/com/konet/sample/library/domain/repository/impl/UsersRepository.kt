@@ -7,12 +7,14 @@ import com.konet.sample.library.domain.model.DUsersPage
 import com.konet.sample.library.domain.repository.IUsersRepository
 import dev.eduayuso.kolibs.konet.impl.KoApiClient
 
-class UsersRepository(api:KoApiClient): IUsersRepository {
+class UsersRepository(
+    override var api:KoApiClient
 
-    override val api = api
-    override val resourceUrl = Constants.Apis.Reqres.users
+): IUsersRepository {
 
-    private val url = resourceUrl // to use a shorter version
+    override var resourceUrl = Constants.Apis.Reqres.users
+
+    private var url = resourceUrl // to use a shorter version
 
     override suspend fun getAll(): DUsersPage? {
 
@@ -21,7 +23,7 @@ class UsersRepository(api:KoApiClient): IUsersRepository {
 
     override suspend fun getPage(page:Int): DUsersPage? {
 
-        val params = "page=${page}"
+        var params = "page=${page}"
         return api.consume(url).get().with(params).response(DUsersPage.serializer())
     }
 
