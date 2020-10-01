@@ -5,9 +5,9 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class DUsersPage(
 
-    val page: Int?,
-    val per_page: Int?,
-    val total: Int?,
-    val total_pages: Int?,
-    val data: List<DUser>?
+    val page: Int? = null,
+    val per_page: Int? = null,
+    val total: Int? = null,
+    val total_pages: Int? = null,
+    val data: List<DUser>? = null
 )

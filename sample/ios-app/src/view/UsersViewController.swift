@@ -20,10 +20,14 @@ class UsersViewController: UIViewController {
     
         super.viewDidLoad()
         
+        let a = factory.cache
+        let b = factory.usersRepository
+        let c = factory.authRepository
+        
         viewModel = UsersViewModel(
-            cache: factory.cache,
-            userRepo: factory.usersRepository,
-            authRepo: factory.authRepository
+            cache: a,
+            userRepo: b,
+            authRepo: c
         )
         
         viewModel.users.addObserver { [weak self] result in
@@ -41,8 +45,8 @@ class UsersViewController: UIViewController {
         }
     }
     
-    private var fakeUser = DUser(id:2, email:"test@konet.com", first_name:"Konet")
-    private var fakeAuth = DAuthRequest(email: "eve.holt@reqres.in", password: "cityslicka")
+    private let fakeUser = DUser(id:2, email:"test@konet.com", first_name:"Konet")
+    private let fakeAuth = DAuthRequest(email: "eve.holt@reqres.in", password: "cityslicka")
     
     @IBAction func getUsersClick(_ sender: Any) {
         

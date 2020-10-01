@@ -12,15 +12,11 @@ private const val PARAM_DELIMITER = "="
 
 class KoHttpRequest(
 
-    http: HttpClient,
-    request: HttpRequestBuilder,
-    json: StringFormat
+    override val httpClient: HttpClient,
+    override val request: HttpRequestBuilder,
+    override val json: StringFormat
 
 ): IKoHttpRequest {
-
-    override val httpClient = http
-    override val request = request
-    override val json = json
 
     override fun with(params:String): KoHttpRequest {
 
@@ -34,7 +30,7 @@ class KoHttpRequest(
         try {
             val result: String = httpClient.request(this.request)
             return if (serializer == null) null
-            else this.json.parse(serializer, result)
+            else this.json.decodeFromString(serializer, result)
         } catch (pipeline: ReceivePipelineException) {
             throw pipeline.cause
         }

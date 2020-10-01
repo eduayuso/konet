@@ -1,18 +1,15 @@
 package dev.eduayuso.kolibs.konet.impl
 
-import dev.eduayuso.kolibs.konet.Defaults
 import dev.eduayuso.kolibs.konet.IKoHttpRequest
 import dev.eduayuso.kolibs.konet.IKoRestConsumer
-import dev.icerock.moko.network.LargeTextContent
 import io.ktor.client.request.HttpRequestBuilder
 import io.ktor.client.utils.EmptyContent
+import io.ktor.content.*
 import io.ktor.http.ContentType
 import io.ktor.http.HttpMethod
 import io.ktor.http.takeFrom
 import kotlinx.serialization.KSerializer
-import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
-import kotlinx.serialization.json.JsonConfiguration
 
 class KoRestConsumer(
     api: KoApiClient,
@@ -24,7 +21,11 @@ class KoRestConsumer(
     override val resourcePath = resourcePath
     override val httpClient = api.httpClient
     override val httpHeaders = api.getHeaders()
-    override val json = defaults.json
+    override val json: Json by lazy {
+        Json {
+            ignoreUnknownKeys = true
+        }
+    }
 
     fun get(): IKoHttpRequest {
 
@@ -71,10 +72,10 @@ class KoRestConsumer(
         return this.buildRequest(HttpMethod.Delete, "${this.resourcePath}/$id", EmptyContent)
     }
 
-    private fun <T> buildRequestBody(body: T, serializable: KSerializer<T>): LargeTextContent =
+    private fun <T> buildRequestBody(body: T, serializable: KSerializer<T>): TextContent =
 
-        LargeTextContent(
-            json.stringify(serializable, body),
+        TextContent(
+            json.encodeToString(serializable, body),
             ContentType.Application.Json.withoutParameters()
         )
 

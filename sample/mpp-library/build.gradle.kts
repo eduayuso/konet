@@ -4,36 +4,31 @@
  */
 
 plugins {
-    id("com.android.library")
-    id("org.jetbrains.kotlin.multiplatform")
-    id("kotlinx-serialization")
-    id("dev.icerock.mobile.multiplatform")
+    plugin(Deps.Plugins.androidLibrary)
+    plugin(Deps.Plugins.kotlinMultiplatform)
+    plugin(Deps.Plugins.kotlinSerialization)
+    plugin(Deps.Plugins.mobileMultiplatform)
+    plugin(Deps.Plugins.iosFramework)
 }
 
-android {
-    compileSdkVersion(Versions.Android.compileSdk)
-
-    defaultConfig {
-        minSdkVersion(Versions.Android.minSdk)
-        targetSdkVersion(Versions.Android.targetSdk)
-    }
+framework {
+    export(Deps.Libs.MultiPlatform.mokoMvvm)
 }
-
-setupFramework(
-    exports = listOf(
-        Deps.Libs.MultiPlatform.konet,
-        Deps.Libs.MultiPlatform.mokoMvvm
-    )
-)
 
 dependencies {
-    mppLibrary(Deps.Libs.MultiPlatform.kotlinStdLib)
-    mppLibrary(Deps.Libs.MultiPlatform.coroutines)
-    mppLibrary(Deps.Libs.MultiPlatform.ktorClient)
-    mppLibrary(Deps.Libs.MultiPlatform.ktorClientLogging)
-    mppLibrary(Deps.Libs.MultiPlatform.serialization)
-    mppLibrary(Deps.Libs.MultiPlatform.mokoMvvm)
-    mppLibrary(Deps.Libs.MultiPlatform.konet)
+    commonMainImplementation(Deps.Libs.MultiPlatform.coroutines) {
+        // we should force native-mt version for ktor 1.4.0 on iOS
+        isForce = true
+    }
+    commonMainImplementation(Deps.Libs.MultiPlatform.ktorClient)
+    commonMainImplementation(Deps.Libs.MultiPlatform.ktorClientLogging)
+    commonMainImplementation(Deps.Libs.MultiPlatform.kotlinSerialization)
+    commonMainImplementation(Deps.Libs.MultiPlatform.mokoNetwork)
+    commonMainApi(Deps.Libs.MultiPlatform.mokoMvvm.common)
+    commonMainImplementation(Deps.Libs.MultiPlatform.konet)
 
-    androidLibrary(Deps.Libs.Android.lifecycle)
+    androidMainImplementation(Deps.Libs.Android.lifecycle)
+
+    // temporary fix of https://youtrack.jetbrains.com/issue/KT-41821
+    commonMainImplementation("org.jetbrains.kotlinx:atomicfu:0.14.4")
 }
