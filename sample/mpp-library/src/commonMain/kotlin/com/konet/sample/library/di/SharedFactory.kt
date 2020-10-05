@@ -12,6 +12,7 @@ import io.ktor.client.HttpClient
 import io.ktor.client.features.logging.LogLevel
 import io.ktor.client.features.logging.Logger
 import io.ktor.client.features.logging.Logging
+import kotlinx.serialization.json.Json
 
 /*
  * This must be a 'class', can't be an 'object' because in iOS the httpClient
@@ -30,13 +31,23 @@ class SharedFactory {
         )
     }
 
+    private val _json =
+
+        Json {
+            encodeDefaults = false
+            isLenient = true
+            ignoreUnknownKeys = true
+            allowSpecialFloatingPointValues = true
+            useArrayPolymorphism = true
+        }
+
     /**
      * Api client singleton with custom Http client and custom dynamic header
      */
     private val customReqresApi by lazy {
 
         object: KoApiClient() {
-
+            override val json = _json
             override val baseUrl = Constants.Apis.Reqres.url
             override val httpClient = customHttpClient
 
@@ -80,48 +91,18 @@ class SharedFactory {
         }
     }
 
-    /*
-    private val customHttpClient: HttpClient by lazy {
-        HttpClient {
-            install(ExceptionFeature) {
-                exceptionFactory = HttpExceptionFactory(
-                    defaultParser = ErrorExceptionParser(Defaults.json),
-                    customParsers = mapOf(
-                        HttpStatusCode.UnprocessableEntity.value to ValidationExceptionParser(Defaults.json)
-                    )
-                )
-            }
-            install(Logging) {
-                logger = object : Logger {
-                    override fun log(message: String) {
-                    //    Napier.d(message = message)
-                    }
-                }
-                level = LogLevel.HEADERS
-            }
-            install(TokenFeature) {
-                tokenHeaderName = "Authorization"
-                tokenProvider = object : TokenFeature.TokenProvider {
-                    override fun getToken(): String? = "hola"//keyValueStorage.token
-                }
-            }
-
-            // disable standard BadResponseStatus - exceptionfactory do it for us
-            expectSuccess = false
-        }
-    }
-    */
-
     val usersRepository: UsersRepository by lazy {
 
         UsersRepository(
-            api = reqresApi
+            api = customReqresApi
         )
     }
 
     val authRepository: IAuthRepository by lazy {
 
-        AuthRepository(reqresApi)
+        AuthRepository(
+            api = customReqresApi
+        )
     }
 
     val cache: DataCache by lazy {
