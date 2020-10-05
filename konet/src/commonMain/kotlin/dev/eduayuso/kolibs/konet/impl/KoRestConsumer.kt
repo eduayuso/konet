@@ -21,11 +21,7 @@ class KoRestConsumer(
     override val resourcePath = resourcePath
     override val httpClient = api.httpClient
     override val httpHeaders = api.getHeaders()
-    override val json: Json by lazy {
-        Json {
-            ignoreUnknownKeys = true
-        }
-    }
+    override val json = api.json
 
     fun get(): IKoHttpRequest {
 

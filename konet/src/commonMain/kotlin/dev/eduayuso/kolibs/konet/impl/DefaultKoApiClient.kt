@@ -15,7 +15,7 @@ class DefaultKoApiClient(
 
 ) : KoApiClient() {
 
-    private val json =
+    override val json =
         Json {
             encodeDefaults = false
             isLenient = true
