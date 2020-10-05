@@ -41,7 +41,7 @@ publishing {
 
         credentials {
             username = "eduayuso"
-            password = "52c643e4f6e99037d07b713d55badda3c93dd54c"
+            password = ""
         }
     }
 }
