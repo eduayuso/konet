@@ -24,7 +24,8 @@ kotlin {
 
 dependencies {
 
-    commonMainApi(Deps.Libs.MultiPlatform.kotlinSerialization)
+    commonMainApi(Deps.Libs.MultiPlatform.kotlinSerializationCore)
+    commonMainApi(Deps.Libs.MultiPlatform.kotlinSerializationJson)
     commonMainApi(Deps.Libs.MultiPlatform.ktorClient)
     commonMainImplementation(Deps.Libs.MultiPlatform.ktorClientLogging)
     commonMainImplementation(Deps.Libs.MultiPlatform.mokoNetwork)

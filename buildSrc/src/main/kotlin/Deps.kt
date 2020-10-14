@@ -13,7 +13,7 @@ object Deps {
         val kotlinKapt              = GradlePlugin(id = "kotlin-kapt")
         val kotlinAndroid           = GradlePlugin(id = "kotlin-android")
         val kotlinAndroidExtensions = GradlePlugin(id = "kotlin-android-extensions")
-        val kotlinSerialization     =  GradlePlugin(
+        val kotlinSerialization     = GradlePlugin(
             id = "org.jetbrains.kotlin.plugin.serialization",
             module = "org.jetbrains.kotlin:kotlin-serialization:${Versions.kotlin}"
         )
@@ -41,12 +41,13 @@ object Deps {
         }
 
         object MultiPlatform {
-            val coroutines          = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.Libs.coroutines}"
-            val kotlinSerialization = "org.jetbrains.kotlinx:kotlinx-serialization-core:${Versions.Libs.serialization}"
-            val ktorClient          = "io.ktor:ktor-client-core:${Versions.Libs.ktorClient}"
-            val ktorClientLogging   = "io.ktor:ktor-client-logging:${Versions.Libs.ktorClient}"
-            val mokoNetwork         = "dev.icerock.moko:network:${Versions.Libs.mokoNetwork}"
-            val konet               = "dev.eduayuso.kolibs:kontet:${Versions.Libs.konet}"
+            val coroutines              = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.Libs.coroutines}"
+            val kotlinSerializationCore = "org.jetbrains.kotlinx:kotlinx-serialization-core:${Versions.Libs.serialization}"
+            val kotlinSerializationJson = "org.jetbrains.kotlinx:kotlinx-serialization-json:${Versions.Libs.serialization}"
+            val ktorClient              = "io.ktor:ktor-client-core:${Versions.Libs.ktorClient}"
+            val ktorClientLogging       = "io.ktor:ktor-client-logging:${Versions.Libs.ktorClient}"
+            val mokoNetwork             = "dev.icerock.moko:network:${Versions.Libs.mokoNetwork}"
+            val konet                   = "dev.eduayuso.kolibs:kontet:${Versions.Libs.konet}"
             val mokoMvvm = MultiPlatformLibrary(
                 common = "dev.icerock.moko:mvvm:${Versions.Libs.mokoMvvm}",
                 iosX64 = "dev.icerock.moko:mvvm-iosx64:${Versions.Libs.mokoMvvm}",
