@@ -13,7 +13,7 @@ import com.konet.sample.library.presenter.UsersViewModel
 import dev.icerock.moko.mvvm.getViewModel
 import java.util.*
 
-private val fakeUser = DUser(2, "test@konet.com", "Konet")
+private val fakeUser = DUser(2, "test@konet.com", null)
 private val fakeAuth = DAuthRequest(email = "eve.holt@reqres.in", password = "cityslicka")
 
 class UsersActivity : AppCompatActivity() {

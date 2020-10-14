@@ -16,7 +16,10 @@ framework {
 }
 
 dependencies {
-    commonMainImplementation(Deps.Libs.MultiPlatform.coroutines)
+    commonMainImplementation(Deps.Libs.MultiPlatform.coroutines) {
+        // we should force native-mt version for ktor 1.4.0 on iOS
+        isForce = true
+    }
     commonMainImplementation(Deps.Libs.MultiPlatform.ktorClient)
     commonMainImplementation(Deps.Libs.MultiPlatform.ktorClientLogging)
     commonMainImplementation(Deps.Libs.MultiPlatform.kotlinSerializationCore)

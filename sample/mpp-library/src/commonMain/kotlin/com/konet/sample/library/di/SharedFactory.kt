@@ -3,7 +3,6 @@ package com.konet.sample.library.di
 import com.konet.sample.library.Constants
 import com.konet.sample.library.domain.cache.impl.DataCache
 import com.konet.sample.library.domain.repository.IAuthRepository
-import com.konet.sample.library.domain.repository.IUsersRepository
 import com.konet.sample.library.domain.repository.impl.AuthRepository
 import com.konet.sample.library.domain.repository.impl.UsersRepository
 import dev.eduayuso.kolibs.konet.impl.DefaultKoApiClient
@@ -13,6 +12,7 @@ import io.ktor.client.HttpClient
 import io.ktor.client.features.logging.LogLevel
 import io.ktor.client.features.logging.Logger
 import io.ktor.client.features.logging.Logging
+import kotlinx.serialization.json.Json
 
 /*
  * This must be a 'class', can't be an 'object' because in iOS the httpClient
@@ -24,12 +24,22 @@ class SharedFactory {
     /**
      * Default Api client instance with default Http client
      */
-    private val reqresApi by lazy {
+    private val reqresApi: DefaultKoApiClient by lazy {
 
         DefaultKoApiClient(
             baseUrl = Constants.Apis.Reqres.url
         )
     }
+
+    private val _json =
+
+        Json {
+            encodeDefaults = false
+            isLenient = true
+            ignoreUnknownKeys = true
+            allowSpecialFloatingPointValues = true
+            useArrayPolymorphism = true
+        }
 
     /**
      * Api client singleton with custom Http client and custom dynamic header
@@ -37,7 +47,7 @@ class SharedFactory {
     private val customReqresApi by lazy {
 
         object: KoApiClient() {
-
+            override val json = _json
             override val baseUrl = Constants.Apis.Reqres.url
             override val httpClient = customHttpClient
 
@@ -81,14 +91,18 @@ class SharedFactory {
         }
     }
 
-    val usersRepository: IUsersRepository by lazy {
+    val usersRepository: UsersRepository by lazy {
 
-        UsersRepository(reqresApi)
+        UsersRepository(
+            api = customReqresApi
+        )
     }
 
     val authRepository: IAuthRepository by lazy {
 
-        AuthRepository(reqresApi)
+        AuthRepository(
+            api = customReqresApi
+        )
     }
 
     val cache: DataCache by lazy {

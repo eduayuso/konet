@@ -4,7 +4,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class DUser(
-    var id: Int?,
-    var email: String?,
-    var first_name: String?
+    var id: Int? = null,
+    var email: String? = null,
+    var first_name: String? = null
 )

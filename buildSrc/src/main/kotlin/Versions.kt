@@ -14,7 +14,6 @@ object Versions {
 
     object Plugins {
         const val android = "3.6.1"
-        const val kotlin = "1.3.72"
         const val mokoNetwork = "0.8.0"
         const val konet = Products.Konet.version
     }
